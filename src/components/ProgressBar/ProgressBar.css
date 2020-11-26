@@ -1,0 +1,37 @@
+.BarWhole{
+    padding:5px;
+}
+.title{
+    width:100%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+.BarContainer{
+    display: flex;
+    flex-direction: row;
+}
+.BarContainer button{
+    padding:10px;
+    margin-left: 10px;
+}
+.ProgressBar{
+    height:40px;
+    background-color: red;
+    width:100%;
+    border-radius: 20px;
+}
+.BarGreen{
+    position: relative;
+    background-color: green;
+    height:40px;
+    border-radius: 20px;
+    transition: width .2s linear;
+}
+.BarText{
+    position: relative;
+    text-align: center;
+    font-size: 20px;
+    width:100%;
+    bottom: 30px;
+}
