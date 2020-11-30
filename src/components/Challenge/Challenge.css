@@ -1,13 +1,13 @@
 .Challenge{
     overflow-y: hidden;
     background-color: #d95f5f;
-    margin: 20px 0;
+    margin: 5px 0;
     /* transition: max-height .2s ease-out; */
 }
 
 .Title{
     height:60px;
-    color: #444;
+    color: rgb(211, 207, 7);
     cursor: pointer;
     border:none;
     padding: 18px;

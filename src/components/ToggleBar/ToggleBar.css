@@ -15,18 +15,16 @@
     padding:10px;
     margin-left: 10px;
 }
-.ProgressBar{
+.Toggle{
     height:40px;
-    background-color: red;
     width:100%;
     border-radius: 20px;
+    border:2px solid lightgrey;
+    cursor: pointer;
+    outline: none;
 }
-.BarGreen{
-    position: relative;
-    background-color: green;
-    height:40px;
-    border-radius: 20px;
-    transition: width .2s linear;
+.Toggle:hover{
+    border-color: black;
 }
 .BarText{
     position: relative;

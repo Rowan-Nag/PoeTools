@@ -1,8 +1,26 @@
+.UtilityBox{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border: 1px dotted black;
+
+}
+.UtilityBox button{
+    padding:20px;
+    margin:auto;
+}
+
 .Challenges{
+    justify-content: center;
     background-color: rgba(0, 0, 0, .1);
     width:60%;
     padding: 0 10%;
     margin: 0 10%;
     display:flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+}
+.ChallengeBox{
+    padding:10px;
+    min-width: 250px;
+    width:20%;
 }

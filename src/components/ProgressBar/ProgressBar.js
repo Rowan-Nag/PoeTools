@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import "./ProgressBar.css";
+import Cookies from "js-cookie";
 
 function ProgressBar(props){
     const [count, setCount] = useState(props.count);
     const [total, setTotal] = useState(props.total);
     const [title, setTitle] = useState(props.title);
+    const challengeNum = props.challengeNum;
+    const barNum = props.barNum;
+
     const incrementCount = () => {
         if(count+1 === total){
             props.i();
         }
         if(count < total){
-            
+            Cookies.set(challengeNum + "-" + barNum, count+1);
             setCount(count+1);
         }
     }
@@ -19,6 +23,7 @@ function ProgressBar(props){
             props.d();
         }
         if(count > 0){
+            Cookies.set(challengeNum + "-" + barNum, count-1);
             setCount(count-1);   
         }
     }
