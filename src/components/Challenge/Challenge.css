@@ -4,7 +4,43 @@
     margin: 5px 0;
     /* transition: max-height .2s ease-out; */
 }
+.BarStatic{
+    height:12px;
+}
+.Green{
+    position: relative;
+    background-color: green;
+    height:12px;
+    transition: width .2s linear;
+}
+.buttonContainer{
+    display: flex;
+    flex-direction: row;
+}
+.smallButtons{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, .2);
+}
 
+.smallButtons button{
+    margin:2px;
+    width:20px;
+    height:20px;
+    border: 1px solid black;
+    border-radius: 50px;
+    cursor: pointer;
+    outline: none;
+    
+}
+.favoriteButton{
+    
+    
+    background-color: yellow;
+}
+.completeAllButton{
+    background-color: #4bbf50;
+}
 .Title{
     height:60px;
     color: rgb(211, 207, 7);

@@ -1,11 +1,13 @@
 .BarWhole{
     padding:5px;
+    color:black;
 }
 .title{
     width:100%;
     text-align: center;
     font-size: 14px;
     font-weight: bold;
+    cursor: pointer;
 }
 .BarContainer{
     display: flex;

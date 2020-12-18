@@ -1,5 +1,6 @@
 .BarWhole{
     padding:5px;
+    color:black;
 }
 .title{
     width:100%;
@@ -7,10 +8,7 @@
     font-size: 14px;
     font-weight: bold;
 }
-.BarContainer{
-    display: flex;
-    flex-direction: row;
-}
+
 .BarContainer button{
     padding:10px;
     margin-left: 10px;
@@ -31,7 +29,41 @@
 .BarText{
     position: relative;
     text-align: center;
+    
+    background-color: #d3d3d3;
     font-size: 20px;
     width:100%;
     bottom: 30px;
+}
+.sliderBar{
+    -webkit-appearance: none;
+    width:65%;
+    cursor: pointer;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+.sliderBar:hover {
+    opacity: 1;
+}
+.sliderBar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+  
+.sliderBar::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+
+.data{
+    width:35%;
+    text-align: center;
 }

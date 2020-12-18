@@ -24,3 +24,9 @@
     min-width: 250px;
     width:20%;
 }
+.ObjectiveBox{
+    margin:10px;
+    min-width: 250px;
+    width:20%;
+    border: 1px solid black;
+}

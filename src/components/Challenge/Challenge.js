@@ -1,81 +1,103 @@
 import React, { useState, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import "./Challenge.css";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import challengeList from "../../challengeList.js";
+import objectiveList from "../../objectiveList";
 import Cookies from "js-cookie";
 import ToggleBar from '../ToggleBar/ToggleBar';
+import { setExpanded,
+    setChallengeCompletion,
+    setChallengesDone,
+    toggleFavorited,
+    setAllCompleted } from "../../actionCreators";
+import store from '../../store';
+import xImg from "../../res/letter-x.png";
 
+/*
+* Challenge.js selectors:
+*   objectivesDone, Completed
+*/
 function Challenge(props) {
-    const colors = ["#d95f5f", "#51d63a"];
-    const [complete, setComplete] = useState(props.complete);
-    const [color, setColor] = useState(colors[complete]);
-    const [maxHeight, setMaxHeight] = useState(props.maxHeight);
-    const [objectivesDone, setObjectives] = useState(props.objectives);
+    
+    const dispatch = useDispatch();
+
     const num = props.num;
-    const challenge = challengeList[num];
-    const objectives = challenge.objectives;
+
+    const favorited = useSelector(state=> state.challenges.favorited);
+    const challenge = useSelector(state=> state.challenges[num]);
+    const objectives = challengeList.challenges[num].objectives;
+    const colors = ["#d95f5f", "#51d63a", "#d4b020"];
+    const favorite = favorited.includes(num)
+    var complete = favorite ? 2 : 0;
+    if(challenge.objectivesDone == objectives.length){
+        complete = 1;
+    }
+    const color = colors[complete];
+    const maxHeight = challenge.expanded ? 1000 : 60;
+    
+    const objectivesDone = challenge.objectivesDone;
+    
 
     var bars = [];
 
     function inc_obj(){
-        Cookies.set("C"+num+"O", objectivesDone+1)
-        setObjectives(objectivesDone+1);
         
-        if(objectivesDone+1 == objectives.length){
-            setColor(colors[1]);
-            setComplete(1);
-            
-        }
+        setChallengeCompletion(num, objectivesDone+1);
+        
     }
     function dec_obj(){
-        Cookies.set("C"+num+"O", objectivesDone-1)
-        setObjectives(objectivesDone-1);
         
-        if(objectivesDone-1 < objectives.length /*Total Objectives*/){
-            setColor(colors[0]);
-            setComplete(0);
+        setChallengeCompletion(num, objectivesDone-1, true);
+        
+    }
+
+    function toggleExpand(){
+        if(maxHeight == 60){
+            //Cookies.set("C"+num+"H", 1000)
+            dispatch(setExpanded(num,true));
+            
+            //setMaxHeight(1000);
+        }else{
+            dispatch(setExpanded(num,false));
+
+            //setMaxHeight(60);
+            //Cookies.set("C"+num+"H", 60)
         }
     }
 
-    function toggleComplete(){
-        setComplete(complete+1);
-        setColor(colors[(complete+1)%2]);
-    }
-    
     for(let i = 0; i < objectives.length; i++){
-        if(challenge.counts[i]==1){
+        if(objectiveList.objectives[objectives[i]].total==1){
             bars.push(<ToggleBar
                 key = {i}
-                count = {Cookies.get(num+"-"+i) || 0/*get from cookies */}
-                title={objectives[i]}
                 i = {inc_obj}
                 d = {dec_obj}
-                challengeNum = {num}
-                barNum = {i}/>)
+                num = {objectives[i]}/>)
         }
         else{
             bars.push(<ProgressBar
                 key = {i}
-                count = {Cookies.get(num+"-"+i) || 0/*get from cookies */}
-                total = {challenge.counts[i]}
-                title={objectives[i]}
                 i = {inc_obj}
                 d = {dec_obj}
-                challengeNum = {num}
-                barNum = {i}/>)
+                num = {objectives[i]}/>)
         }
     }
     return (
         <div className="Challenge" style={{backgroundColor:color, maxHeight:maxHeight+"px"}}>
-            <button className="Title" onClick={()=>{
-                if(maxHeight === 60){
-                    Cookies.set("C"+num+"H", 1000)
-                    setMaxHeight(1000);
-                }else{
-                    setMaxHeight(60);
-                    Cookies.set("C"+num+"H", 60)
-                }
-            }}><b>{num}</b> -{objectivesDone} - {challenge.name}</button>
+            <div className="BarStatic">
+                <div className="Green" style={{width:Math.ceil(100*objectivesDone/objectives.length)+"%"}}></div>
+            </div>
+            <div className="buttonContainer">
+                <button className="Title" onClick={toggleExpand}><b>{num}</b> - {challengeList.challenges[num].name}</button>
+                <div className="smallButtons">
+                    <button className="favoriteButton" onClick={()=>{
+                        dispatch(toggleFavorited(num));
+                    }}></button>
+                    <button className="completeAllButton" onClick={()=>{
+                        setAllCompleted(num);
+                    }}></button>
+                </div>
+            </div>
             {bars}
             {/* <button onClick={toggleComplete}>Toggle Complete
             </button> */}

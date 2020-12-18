@@ -1,0 +1,8 @@
+.Objective{
+    overflow-y: hidden;
+    background-color: #d95f5f;
+    height:100px;
+    text-align: center;
+    color:rgb(73, 65, 65);
+    /* transition: max-height .2s ease-out; */
+}
